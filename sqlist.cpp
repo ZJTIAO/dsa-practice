@@ -7,8 +7,8 @@ struct SqList {
     int length;
 };
 
-void InitList(struct SqList L) {
-    L.length = 0
+void InitList(struct SqList &L) {
+    L.length = 0;
 }
 int main() {
     struct SqList L;
