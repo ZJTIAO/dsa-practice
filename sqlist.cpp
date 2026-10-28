@@ -15,7 +15,7 @@ int ListInsert(struct SqList &L, int i, int e) {
     if (L.length >= MAXSIZE) {
         return 0;
     }
-    if (i > 1 || i > L.length + 1) {
+    if (i < 1 || i > L.length + 1) {
         return 0;
     }
     for (int j = L.length; j >= i; j--) {
@@ -26,18 +26,36 @@ int ListInsert(struct SqList &L, int i, int e) {
     return 1;
 }
 
+int LocateElem(struct SqList L, int e) {
+    for (int j = 0; j < L.length; j++) {
+        if (L.data[j] == e) {
+            return j + 1;
+        }
+    }
+    return 0;
+}
+
 int main() {
     struct SqList L;
     InitList(L);
 
+    int p0 = LocateElem(L, 7);
+    printf("空表找7: 位置=%d\n", p0);
+
     int ok1 = ListInsert(L, 1, 7);
-    printf("空格插入: %d, length=%d, data[0]=%d\n", ok1, L.length, L.data[1]);
+    printf("空格插入: %d, length=%d, data[0]=%d\n", ok1, L.length, L.data[0]);
 
     int ok2 = ListInsert(L, 2, 9);
     printf("表尾插入: %d, length=%d, data[1]=%d\n", ok2, L.length, L.data[1]);
 
     int ok3 = ListInsert(L, 99, 5);
-    printf("越界插入: %d,length=%d\n", ok3, L.length);
+    printf("越界插入：%d, length=%d\n", ok3, L.length);
+
+    int p9 = LocateElem(L, 9);
+    printf("找9: 位置=%d\n", p9);
+
+    int p99 = LocateElem(L, 99);
+    printf("找99: 位置=%d\n", p99);
 
     return 0;
 }
